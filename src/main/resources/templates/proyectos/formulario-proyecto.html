@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <header th:insert="fragments/navbar.html :: nav-bar"></header>
+    <main class="hero">
+      <div class="hero-title text-center">
+        <p class="h1">Nuevo proyecto</p>
+      </div>
+      <div class="hero-list-actions container">
+        <form
+          class="row g-3"
+          method="post"
+          th:action="@{/proyectos/agregar}"
+          th:object="${proyecto}"
+        >
+          <div class="col-md-12 text-center">
+            <label for="nombre" class="form-label">Nombre del proyecto: </label>
+            <input
+              type="nombre"
+              class="form-control text-center"
+              id="nombre"
+              th:value="*{nombre}"
+              name="nombre"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="fechaInicio" class="form-label">Fecha inicio:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="fechaInicio"
+              th:value="*{{fechaInicio}}"
+              name="fechaInicio"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="fechaFin" class="form-label">Fecha fin:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="fechaFin"
+              th:value="*{{fechaFin}}"
+              name="fechaFin"
+              required
+            />
+          </div>
+          <div class="col-12">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <textarea
+              class="form-control"
+              id="descripcion"
+              rows="3"
+              th:value="*{{descripcion}}"
+              name="descripcion"
+              required
+            ></textarea>
+          </div>
+          <div class="col-md-6">
+            <label for="projectManager" class="form-label"
+              >Project Manager:</label
+            >
+            <select
+              class="form-select"
+              id="idPm"
+              name="idPm"
+              required
+            >
+              <option th:each="pm : ${pms}" th:value="${pm.id}" th:text="${pm.nombre}"></option>
+            </select>
+            <!-- <p th:text="*{projectManager.id}"></p> -->
+          </div>
+          <div class="col-md-6">
+            <label for="desarrolladores" class="form-label"
+              >Desarrolladores:</label
+            >
+            <select
+              class="form-select"
+              id="idDesarrolladores"
+              name="idDesarrolladores"
+              multiple
+            >
+              <option th:each="dev : ${devs}" th:value="${dev.id}" th:text="${dev.nombre}"></option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary mb-2">Registrar</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

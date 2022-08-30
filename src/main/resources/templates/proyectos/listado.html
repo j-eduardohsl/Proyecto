@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <header th:insert="fragments/navbar.html :: nav-bar"></header>
+    <main class="hero">
+      <div class="hero-title text-center">
+        <p class="h1">Listado de proyectos</p>
+      </div>
+      <div class="container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Fecha inicio</th>
+              <th scope="col">Fecha fin</th>
+              <th scope="col">PM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="proyecto : ${proyectos}">
+              <td><span th:text="${proyecto.id}"></span></td>
+              <td><span th:text="${proyecto.nombre}"></span></td>
+              <td><span th:text="${proyecto.fechaInicio}"></span></td>
+              <td><span th:text="${proyecto.fechaFin}"></span></td>
+              <td><span th:text="${proyecto.projectManager.nombre}"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
